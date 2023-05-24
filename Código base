@@ -53,6 +53,11 @@ for i in range(8):
     heart_image = scale_image(heart_image, 30)
     heart_images.append(heart_image)
 
+#Bullet img
+bullet_img = pygame.image.load('images/laserRed16.png').convert_alpha()
+bullet_img = pygame.transform.rotate(bullet_img, -90)
+
+
 # list of different bird colors
 bird_colors = ['blue', 'grey', 'red', 'yellow']
 
@@ -112,6 +117,7 @@ class Player(pygame.sprite.Sprite):
         # check if player collides with a bird
         if pygame.sprite.spritecollide(self, bird_group, True):
             self.lives -= 1
+        
 
 class Bullet(pygame.sprite.Sprite):
     
@@ -138,7 +144,27 @@ class Bullet(pygame.sprite.Sprite):
         # remove bullet from sprite group when it goes off screen
         if self.x > game_width:
             self.kill()
+class Bullet2(pygame.sprite.Sprite):
+    # Construtor da classe.
+    def __init__(self, img, x, y):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
 
+        self.image = img
+        self.rect = self.image.get_rect()
+
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.x = x
+        self.rect.y = y
+        self.speedx = 10  # Velocidade fixa para cima
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.x > game_width:
+            self.kill()
 class Bird(pygame.sprite.Sprite):
     
     def __init__(self):
@@ -224,9 +250,10 @@ while running:
 
     # shoot bullet with space bar
     if keys[K_SPACE] and last_bullet_time + bullet_cooldown < pygame.time.get_ticks():
-        bullet_x = player.x + player.image.get_width()
-        bullet_y = player.y + player.image.get_height() // 2
-        bullet = Bullet(bullet_x, bullet_y)
+        bullet_x = player.x
+        bullet_y = player.y
+
+        bullet = Bullet2(bullet_img, bullet_x, bullet_y)
         bullet_group.add(bullet)
         last_bullet_time = pygame.time.get_ticks()
 
@@ -251,8 +278,10 @@ while running:
 
     # draw the bullets
     bullet_group.update()
-    for bullet in bullet_group:
-        bullet.draw()
+    bullet_group.draw(game_window)
+    # for bullet in bullet_group:
+    #     bullet.draw()
+
 
     # draw the birds
     bird_group.update()
