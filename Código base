@@ -71,7 +71,6 @@ for bird_color in bird_colors:
         bird_image = scale_image(bird_image, 50)
 
         # horizontally flip the image to make the bird face left
-        bird_image = pygame.transform.flip(bird_image, True, False)
 
         # add the image to the list of its color in the dictionary
         bird_images[bird_color].append(bird_image)
