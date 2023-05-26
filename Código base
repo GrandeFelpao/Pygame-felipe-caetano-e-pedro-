@@ -114,9 +114,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-        # check if player collides with a bird
+        # check if player collides with a bird ##EASTER EGG, SE ELE COLIDIR COM O PÁSSARO ELE PODE TER QUALQUER NÚMERO DE VIDAS ENTRE 0 E 3
         if pygame.sprite.spritecollide(self, bird_group, True):
-            self.lives -= 1
+            self.lives = random.randint(0, 3)
         
 
 class Bullet(pygame.sprite.Sprite):

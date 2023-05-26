@@ -2,7 +2,7 @@
 
 Autores: Felipe T., Caetano C. e Pedro C. 
 
-Descrição do Projeto: Nosso projeto consiste num side-scroller, no qual, ao acertar um meteoro azul com um míssel, o player ganha uma vida extra e, ao colidir com qualquer meteoro, ele perde uma vida. Quando suas vidas zerarem, ele perd.e
+Descrição do Projeto (contém descrição do Easter Egg): Nosso projeto consiste num side-scroller, no qual, ao acertar um meteoro azul com um míssel, o player ganha uma vida extra e, ao colidir com qualquer meteoro, suas vidas podem ter qualquer valor entre 0 e 3. Se suas vidas zerarem, ele perde. 
 
 Como executar o jogo: Abra a pasta no vscode e rode o arquivo Código base.
 
