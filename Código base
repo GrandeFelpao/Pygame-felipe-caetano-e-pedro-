@@ -56,7 +56,7 @@ for i in range(8):
 
 #Bullet img
 bullet_img = pygame.image.load('images/laserRed16.png').convert_alpha()
-bullet_img = pygame.transform.rotate(bullet_img, -90)
+bullet_img = scale_image(bullet_img, 70)
 
 
 # list of different bird colors
@@ -157,7 +157,7 @@ class Bullet2(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.x = x
         self.rect.y = y
-        self.speedx = 10  # Velocidade fixa para cima
+        self.speedx = 3  # Velocidade fixa para cima
 
     def update(self):
         # A bala só se move no eixo y
