@@ -16,6 +16,7 @@ padding_y = 50
 black = (0, 0, 0)
 red = (255, 0, 0)
 yellow = (255, 255, 0)
+green = (0, 255, 0)
 
 # number of milliseconds before you can fire another bullet
 bullet_cooldown = 500
@@ -316,15 +317,15 @@ while running:
             if event.type == QUIT:
                 pygame.quit()
 
-        gameover_str = f'Game over. Play again (y or n)?'
+        gameover_str = f'Você perdeu :(. Jogar novamente? [S] Quit?[Q])'
         font = pygame.font.Font(pygame.font.get_default_font(), 24)
-        text = font.render(gameover_str, True, red)
+        text = font.render(gameover_str, True, green)
         text_rect = text.get_rect()
         text_rect.center = (game_width / 2, game_height / 2)
         game_window.blit(text, text_rect)
 
         keys = pygame.key.get_pressed()
-        if keys[K_y]:
+        if keys[K_s]:
 
             # clear the sprite groups
             player_group.empty()
@@ -335,7 +336,7 @@ while running:
             player = Player(player_x, player_y)
             player_group.add(player)
 
-        elif keys[K_n]:
+        elif keys[K_q]:
             running = False
             break
         
