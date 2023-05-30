@@ -157,7 +157,7 @@ class Bullet2(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.x = x
         self.rect.y = y
-        self.speedx = 3  # Velocidade fixa para cima
+        self.speedx = 4  # Velocidade do missel
 
     def update(self):
         # A bala só se move no eixo y
