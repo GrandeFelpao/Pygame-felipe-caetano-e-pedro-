@@ -4,7 +4,7 @@ import random
 
 pygame.init()
 
-# create the window
+# Criando janela de jogo
 game_width = 800
 game_height = 500
 screen_size = (game_width, game_height)
@@ -12,20 +12,20 @@ game_window = pygame.display.set_mode(screen_size)
 pygame.display.set_caption('Side Scroller')
 padding_y = 50
 
-# colors
+# define cores
 black = (0, 0, 0)
 red = (255, 0, 0)
 yellow = (255, 255, 0)
 green = (0, 255, 0)
 
-# number of milliseconds before you can fire another bullet
+# cooldown
 bullet_cooldown = 500
 
-# timestamp of last bullet fired
+#contador de tempo do ultimo tiro
 last_bullet_time = pygame.time.get_ticks()
 
 # time when the next bird will spawn
-next_bird = pygame.time.get_ticks()
+next_meteor = pygame.time.get_ticks()
 
 # function for resizing an image
 def scale_image(image, new_width):
@@ -120,31 +120,6 @@ class Player(pygame.sprite.Sprite):
             self.lives = random.randint(0, 3)
         
 
-class Bullet(pygame.sprite.Sprite):
-    
-    def __init__(self, x, y):
-
-        pygame.sprite.Sprite.__init__(self)
-        self.x = x
-        self.y = y
-        self.radius = 5
-
-        self.rect = Rect(x, y, 10, 10)
-
-    def draw(self):
-        pygame.draw.circle(game_window, yellow, (self.x, self.y), self.radius)
-
-    def update(self):
-
-        # move the bullet to the right
-        self.x += 2
-
-        self.rect.x = self.x
-        self.rect.y = self.y
-
-        # remove bullet from sprite group when it goes off screen
-        if self.x > game_width:
-            self.kill()
 class Bullet2(pygame.sprite.Sprite):
     # Construtor da classe.
     def __init__(self, img, x, y):
@@ -259,12 +234,12 @@ while running:
         last_bullet_time = pygame.time.get_ticks()
 
     # spawn a new bird
-    if next_bird < pygame.time.get_ticks():
+    if next_meteor < pygame.time.get_ticks():
         bird = Bird()
         bird_group.add(bird)
 
-        # randomly pick between 0 to 3 seconds when the next bird will spawn
-        next_bird = random.randint(pygame.time.get_ticks(), pygame.time.get_ticks() + 3000)
+        # randomly pick between 0 to 1.5 seconds when the next bird will spawn
+        next_meteor = random.randint(pygame.time.get_ticks(), pygame.time.get_ticks() + 1500)
 
     # draw the background
     game_window.blit(bg, (0 - bg_scroll, 0))
