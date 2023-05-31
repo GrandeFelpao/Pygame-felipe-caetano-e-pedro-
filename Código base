@@ -225,14 +225,22 @@ while running:
         player.image_angle = 0
 
     # shoot bullet with space bar
-    if keys[K_SPACE] and last_bullet_time + bullet_cooldown < pygame.time.get_ticks():
-        bullet_x = player.x
-        bullet_y = player.y
+    if player.score >=5 and player.score<=10:
+        if keys[K_SPACE] and last_bullet_time+100 < pygame.time.get_ticks():
+            bullet_x = player.x
+            bullet_y = player.y
 
-        bullet = Bullet2(bullet_img, bullet_x, bullet_y)
-        bullet_group.add(bullet)
-        last_bullet_time = pygame.time.get_ticks()
+            bullet = Bullet2(bullet_img, bullet_x, bullet_y)
+            bullet_group.add(bullet)
+            last_bullet_time = pygame.time.get_ticks()
+    if player.score<5 or player.score>=11:
+        if keys[K_SPACE] and last_bullet_time + bullet_cooldown < pygame.time.get_ticks():
+            bullet_x = player.x
+            bullet_y = player.y
 
+            bullet = Bullet2(bullet_img, bullet_x, bullet_y)
+            bullet_group.add(bullet)
+            last_bullet_time = pygame.time.get_ticks()
     # spawn a new bird
     if next_meteor < pygame.time.get_ticks():
         bird = Bird()
